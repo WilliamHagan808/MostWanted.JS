@@ -1,12 +1,7 @@
 "use strict"
 
 
-//Menu functions.
-//Used for the overall flow of the application.
-/////////////////////////////////////////////////////////////////
-//#region 
 
-// app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
@@ -15,7 +10,31 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      let multiSearchYesNo = promptFor("Do you want to search with multiple criteria?", yesNo).toLowerCase();
+      if(multiSearchYesNo === 'no'){
+      searchMultiple = searchByCriteria(people);
+      }
+      else{
+        let searchOne = promptFor("What do you want to search by ? \n gender? \n eye color? \n height and weight? \n occupation? ", customValidation, 'menu', people)
+        switch(searchOne){
+          case "gender":
+          displayPeople(searchByGender(people))
+          break;
+          case "eye color":
+          displayPeople(searchByEyeColor(people))
+          break;
+          case "height and weight":
+          displayPeople(searchByHeightAndWeight(people))
+          break;
+          case "occupation":
+          displayPeople(searchByOccupation(people))
+          break;
+          case "quit":
+          return; // stop execution
+          default:
+          return mainMenu(person, people); // ask again
+      }
+    }
       break;
       default:
     app(people); // restart app
@@ -79,7 +98,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  return foundPerson[0];
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
