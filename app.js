@@ -58,22 +58,25 @@ function mainMenu(person, people){
   let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
-    case "info":
-    // TODO: get person's info
-    break;
-    case "family":
-    // TODO: get person's family
-    break;
-    case "descendants":
-    // TODO: get person's descendants
-    break;
-    case "restart":
-    app(people); // restart
-    break;
-    case "quit":
-    return; // stop execution
-    default:
-    return mainMenu(person, people); // ask again
+      case "info":
+      displayPerson(person);
+      mainMenu(person, people);
+      break;
+      case "family":
+      alert(displayFamily(person, people));
+      mainMenu(person, people);
+      break;
+      case "descendants":
+      searchForKids(person, people);
+      mainMenu(person, people);
+      break;
+      case "restart":
+      app(people); // restart
+      break;
+      case "quit":
+      return; // stop execution
+      default:
+      return mainMenu(person, people); // ask again
   }
 }
 
@@ -98,13 +101,97 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson[0];
+  return foundPerson[0]; // made a correction to array added in [0]
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people){
-
+function searchByCriteria(people){
+  let person = searchByGender(people)  
+  person = searchByHeightAndWeight(person)
+  person = searchByOccupation(person)
+  if (person.length > 1 ){
+    alert()
+let response = promptFor("Do you know the person's id? Yes or No? ", yesNo).toLocaleLowerCase();
+if (response == 'yes'){
+  let person = searchByID(people)
+  mainMenu(person, people)
 }
+
+  response = promptFor("Do you know the person's gender? Yes or No? ", yesNo).toLocaleLowerCase();
+  let searchedGroup = people
+  if (response == 'yes'){
+    searchedGroup = searchByGender(searchedGroup)  
+  }
+  else if (response == 'no'){
+
+  }
+
+  response = promptFor("Do you know the person's height and weight? Yes or No? ", yesNo).toLocaleLowerCase();
+  if (response == 'yes'){
+    searchedGroup = searchByHeightAndWeight(searchedGroup)
+  }
+  else if (response =='no'){
+
+  }
+
+  response = promptFor("Do you know the person's occupation? Yes or No? ", yesNo).toLocaleLowerCase();
+  if (response == 'yes'){
+    searchedGroup = searchByOccupation(searchedGroup)
+  }
+  else if (response == 'no'){
+
+  }
+
+  response = promptFor("Do you know the person's eye color? Yes or No? ", yesNo).toLocaleLowerCase();
+  if (response == 'yes'){
+    searchedGroup = searchByEyeColor(searchedGroup)
+  }
+  else if (response == 'no'){
+
+  }
+
+
+  if (searchedGroup.length > 1){
+    displayPeople(searchedGroup)
+    return app(people)
+  }
+  else if (searchedGroup.length = 1){
+    let person = searchedGroup[0]
+    mainMenu(person, people)
+  }
+  else {
+    app(people)
+  }
+  console.log(people)
+  console.log(person[0])
+  mainMenu(person[0], people)
+}
+}
+function searchByEyeColor(people){ 
+  let eyeColor = promptFor("What is the person's eye color?", customValidation, 'eyeColor', people)
+  let foundEyeColor = people.filter(function(potentialMatch){
+    if(potentialMatch.eyeColor === eyeColor){
+      return true;
+  }
+    else{
+      return false
+    }
+})
+return foundEyeColor
+}
+function searchByGender(people){
+  let gender = promptFor("What is the person's gender?", customValidation, 'gender', people) 
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.gender === gender){
+      return true;
+  }
+    else{
+      return false
+    }
+})
+return foundPerson
+} // left of here
+
 
 //TODO: add other trait filter functions here.
 
@@ -176,5 +263,3 @@ function autoValid(input){
 function customValidation(input){
   
 }
-
-//#endregion
