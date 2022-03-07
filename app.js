@@ -195,6 +195,137 @@ return foundPerson
 
 //TODO: add other trait filter functions here.
 
+function searchByID(people, id = promptFor("What's is the person's ID?")){
+  function searchByID(people, id = promptFor("What's is the person's ID? ", customValidation, 'id', people)){
+    let foundPerson = people.filter(function(potentialMatch){
+      if(potentialMatch.id == id){
+        return true;
+      }
+      else {
+        return false;
+      }
+    })
+    return foundPerson[0]
+  }
+  function searchByParentID(person, people){
+    let foundParent = people.filter(function(potentialMatch){
+      if(potentialMatch.id === person.parents[0] || potentialMatch.id === person.parents[1]){
+        return true
+      }
+      else {
+        return false
+      }
+    })
+    return foundParent
+  }
+  function searchByHeightAndWeight(people){
+    let height = promptFor("What is the person's height? ", customValidation, 'height', people)
+    let weight = promptFor("What is the person's weight? ", customValidation, 'weight', people)
+    let foundPerson = people.filter(function(potentialMatch){
+      if(potentialMatch.height == height && potentialMatch.weight == weight){
+        return true;
+      }
+      else {
+        return false;
+      }
+    })
+    return foundPerson
+  }
+  function searchByOccupation(people){
+    let occupation = promptFor("What is the person's job? ", customValidation, 'occupation', people)
+    let foundPerson = people.filter(function(potentialMatch){
+      if (potentialMatch.occupation == occupation){
+        return true;
+      }
+      else {
+        return false;
+      }
+    })
+    return foundPerson;
+  }
+  function searchForSpouse(person, people){
+    if (person.currentSpouse == null){
+      return 'No Spouse';
+    }
+    else if(person.currentSpouse !== null ){
+      let currentSpouse = searchByID(people, person.currentSpouse)
+      currentSpouse = currentSpouse.firstName + ' ' + currentSpouse.lastName;
+      return currentSpouse
+    }
+  }
+  function searchForParents(person, people){              //Returns parents first and last name, trying to change it to return id of parents then run through search for siblings
+    if(person.parents.length == 1){
+      let parent = searchByID(people, person.parents[0]);
+      parent = parent.firstName + ' ' + parent.lastName;
+      return parent;
+    }
+    else if (person.parents.length == 2){
+      let parent1 = searchByID(people, person.parents[0]);
+      let parent2 = searchByID(people, person.parents[1]);
+      let parents = parent1.firstName + ' ' + parent1.lastName +' '+ parent2.firstName + ' ' + parent2.lastName;
+      return parents;
+    }
+    else{
+      return 'No Parents'
+    }
+  }
+  function searchForSiblings(person, people){
+    let searchedPerson = person
+    let parents = searchByParentID(person, people)
+    let siblings;
+    if (parents.length > 0){
+    if (parents.length === 2){
+      let parent1 = parents[0];
+      let parent2 = parents[1];
+      siblings = people.filter(function(potentialMatch){
+        if ((potentialMatch.parents.includes(parent1.id) || potentialMatch.parents.includes(parent2.id)) && searchedPerson.id != potentialMatch.id){
+          return true
+        }
+        else {
+          return false
+        }
+      })
+      return siblings
+    }
+    if (parents.length === 1){
+      let parent1 = parents[0];
+      siblings = people.filter(function(potentialMatch){
+        if ((potentialMatch.parents.includes(parent1.id) && searchedPerson.id != potentialMatch.id)){
+          return true
+        }
+        else {
+          return false
+        }
+      })
+      return siblings = giveName(siblings)
+    }
+    if (searchedPerson.length > 0){
+      siblings = people.filter(function(potentialMatch){
+        if (potentialMatch.parents.includes(parents.id)){
+          return siblings = giveName(siblings)
+            }
+        else {
+          return false
+      }
+    })
+    }
+    if (parents.length <= 0){
+    if (siblings.length >= 1){
+      return siblings = giveName(siblings)
+    }
+    else {
+      return siblings = 'No Siblings'
+    }
+  }
+  else {
+    return siblings = 'No Siblings'
+  }
+  }
+  
+  
+  
+      
+  }
 
 
 //#endregion
@@ -216,7 +347,7 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display.
+  
   alert(personInfo);
 }
 
