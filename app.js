@@ -324,8 +324,35 @@ function searchByID(people, id = promptFor("What's is the person's ID?")){
   
   
   
-      
+      function searchForKids(person, people){
+        let kids = []
+          kids = people.filter(function(potentialMatch){
+            if (potentialMatch.parents.includes(person.id)){
+              return true
+            }
+            else {
+              return false
+            }
+            
+          })
+          if(kids.length > 0 ){
+          alert(giveName(kids))
+          }
+          else{ 
+            alert('No Kids')
+            app(people)
+          }
+      }
+    
+  //function to name people
+  function giveName(names) {
+    let namesCompleted = (names.map(function(names){
+      return names.firstName + " " + names.lastName;
+    }).join('\n'))
+  return namesCompleted 
   }
+}
+}
 
 
 //#endregion
