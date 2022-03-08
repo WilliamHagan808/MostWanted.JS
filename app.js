@@ -481,4 +481,94 @@ function autoValid(input) {
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
-function customValidation(input) {}
+function customValidation(input, people, item) {
+  let isValidInput;
+  
+  if(item==='gender'){
+    item.toLowerCase()
+  for (let i = 0; i < people.length; i++){
+    if(input === people[i].gender){
+      return isValidInput = true
+    }
+  }
+  return isValidInput = false
+}
+if(item==='firstName'){
+  for (let i = 0; i < people.length; i++){
+    if(input === people[i].firstName){
+      return isValidInput = true
+    }
+  }
+  return isValidInput = false
+}
+if(item==='lastName'){
+  for (let i = 0; i < people.length; i++){
+    if(input === people[i].lastName){
+      return isValidInput = true
+    }
+  }
+  return isValidInput = false
+}
+if(item==='height'){
+  for (let i = 0; i < people.length; i++){
+    let newInput = parseInt(input)
+    if(newInput === people[i].height){
+      return isValidInput = true
+    }
+    else {
+    }
+  }
+  return isValidInput = false
+}
+if(item==='weight'){
+  for (let i = 0; i < people.length; i++){
+    let newInput = parseInt(input)
+    if(newInput === people[i].weight){
+      return isValidInput = true
+    }
+    else {
+    }
+  }
+  return isValidInput = false
+}
+if(item==='eye color'){
+  item.toLowerCase()
+  for (let i = 0; i < people.length; i++){
+    if(input === people[i].eyeColor){
+      return isValidInput = true
+    }
+  }
+  return isValidInput = false
+}
+if(item==='occupation'){
+  item.toLowerCase()
+  for (let i = 0; i < people.length; i++){
+    if(input === people[i].occupation){
+      return isValidInput = true
+    }
+  }
+  return isValidInput = false
+}
+if(item==='menu'){
+  item.toLowerCase()
+  if (input === 'gender' || input === 'eye color' || input === 'height and weight' || input === 'occupation'){
+    return isValidInput = true
+  }
+    
+  
+  return isValidInput = false
+}
+
+if(item==='id'){
+  let newInput = parseInt(input)
+  for (let i = 0; i < people.length; i++){
+    if(newInput === people[i].id){
+      return isValidInput = true
+    }
+  }
+  return isValidInput = false
+}
+
+return isValidInput
+}
+app(data);
