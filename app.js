@@ -343,7 +343,7 @@ function searchByID(people, id = promptFor("What's is the person's ID?")){
             app(people)
           }
       }
-    
+    //stopped here
   //function to name people
   function giveName(names) {
     let namesCompleted = (names.map(function(names){
@@ -374,18 +374,21 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "gender: " + person.gender + "\n";
+  personInfo += "dob: " + person.dob + "\n";
+  personInfo += "height: " + person.height + "\n";
+  personInfo += "weight: " + person.weight + "\n";
+  personInfo += "eyecolor: " + person.eyeColor + "\n";
+  personInfo += "occupation: " + person.occupation + "\n";
   
   alert(personInfo);
 }
 
 //#endregion
+// locate personnel through family members
 
 
 
-//Validation functions.
-//Functions to validate user input.
-/////////////////////////////////////////////////////////////////
-//#region 
 
 //a function that takes in a question to prompt, and a callback function to validate the user input.
 //response: Will capture the user input.
