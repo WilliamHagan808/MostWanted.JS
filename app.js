@@ -452,7 +452,7 @@ function displayFamily(person, people) {
 
   }
 //a function that takes in a question to prompt, and a callback function to validate the user input.
-//response: Will capture the user input.
+
 //isValid: Will capture the return of the validation function callback. true(the user input is valid)/false(the user input was not valid).
 //this function will continue to loop until the user enters something that is not an empty string("") or is considered valid based off the callback function(valid).
 function promptFor(question, valid, item, people) {
@@ -476,7 +476,7 @@ function yesNo(input) {
 
 //this will always return true for all inputs.
 function autoValid(input) {
-  return true; // default validation only
+  return true; 
 }
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
