@@ -15,7 +15,7 @@ function app(people) {
         "Do you want to search with multiple criteria?",
         yesNo
       ).toLowerCase();
-      if (multiSearchYesNo === "no") {
+      if (multiSearchYesNo === "yes") {
         searchMultiple = searchByCriteria(people);
       } else {
         let searchOne = promptFor(
@@ -218,7 +218,7 @@ function searchByGender(people) {
     }
   });
   return foundPerson;
-} // left off here
+} 
 
 //TODO: add other trait filter functions here.
 
