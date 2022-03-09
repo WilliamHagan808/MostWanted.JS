@@ -559,3 +559,16 @@ if(item==='menu'){
   return isValidInput = false
 }
 
+if(item==='id'){
+  let newInput = parseInt(input)
+  for (let i = 0; i < people.length; i++){
+    if(newInput === people[i].id){
+      return isValidInput = true
+    }
+  }
+  return isValidInput = false
+}
+
+return isValidInput
+}
+app(data);
