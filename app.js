@@ -433,7 +433,7 @@ function displayPerson(person) {
   alert(personInfo);
 }
 
-//#endregion
+git
 // locate personnel through family members
 function displayFamily(person, people) {
   let spouse = searchForSpouse(person, people);
@@ -473,7 +473,7 @@ function yesNo(input) {
   }
 }
 
-// helper function to pass in as default promptFor validation.
+
 //this will always return true for all inputs.
 function autoValid(input) {
   return true; // default validation only
