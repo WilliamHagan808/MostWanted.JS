@@ -96,7 +96,7 @@ function mainMenu(person, people) {
 
 //#endregion
 
-//Filter functions.
+
 //Ideally you will have a function for each trait.
 /////////////////////////////////////////////////////////////////
 //#region
